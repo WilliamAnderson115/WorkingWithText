@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace WorkingWithText
 {
@@ -31,8 +33,8 @@ namespace WorkingWithText
         // 4- Write a method that accepts a string of a few words separated by a space. Use the
         // words to create a variable name with PascalCase. For example, if the user types: "number
         // of students", return "NumberOfStudents". Make sure that the program is not dependent on
-        // the input. So, if the user types "NUMBER OF STUDENTS", the program should still display "NumberOfStudents".
-        public static bool PascalConverter(string aFewWords)
+        // the input. So, if the user types "NUMBER OF STUDENTS", the program should still return "NumberOfStudents".
+        public static string PascalConverter(string aFewWords)
         {
             return default;
         }
