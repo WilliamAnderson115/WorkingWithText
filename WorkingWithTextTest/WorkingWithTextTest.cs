@@ -1,12 +1,8 @@
-using WorkingWithText;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace WorkingWithTextTest
 {
-    
     // 1- Write a method that accepts a string of positive integers separated by hyphens, if the input is incorrect, return false.
     // Work out if the numbers are consecutive. For example, if the input is "5-6-7-8-9" or
     // "20-19-18-17-16", return bool True; otherwise, return bool False. If the string
@@ -14,17 +10,12 @@ namespace WorkingWithTextTest
     [TestClass]
     public class IsConsecutiveTest
     {
-        //Random randomNum = new Random();
-
-
         [TestMethod]
         public void IsInputHyphenated()
         {
-            //var rambo = randomNum.Next(0, 51);
-
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("6-4 2,9");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input is not hyphenated");
         }
 
         [TestMethod]
@@ -32,21 +23,23 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("6--4-2---9");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input has more than one hyphen between numbers");
         }
 
         [TestMethod]
         public void IsInputConsecutiveAscending()
-        {     
+        {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("0-1-2-3-4");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input is in consecutive ascending order");
         }
 
         [TestMethod]
         public void IsInputConsecutiveDescending()
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("9-8-7-6");
+
+            actual.Should().BeTrue(because: "input is in consecutive descending order");
 
             Assert.IsTrue(actual);
         }
@@ -56,19 +49,17 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("2-2-2-2");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "Input is not consecutive");
         }
 
         [TestMethod]
         public void IsEveryOtherInputNotConsecutive()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("14-16-18-20");
+            var actual = WorkingWithText.WorkingWithText.IsConsecutive("14-15-16-7-18-19-20");
 
-            Assert.IsFalse(actual);
-        }       
+            actual.Should().BeFalse(because: "input is incrementally consecutive");
+        }
     }
-
-
 
 
     // 2- Write a method that accepts a few integers separated by a hyphen. If the input is incorrect, return false. Check
@@ -76,53 +67,52 @@ namespace WorkingWithTextTest
     [TestClass]
     public class AreThereDuplicatesTest
     {
-
         [TestMethod]
         public void IsInputHyphenated()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("6-4 2,9");
+            var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6-4 2,9");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input is not separated properly by hyphens");
         }
 
         [TestMethod]
         public void IsInputMultiHyphenated()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("6--4-2---9");
+            var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6--4-2---9");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input has more than one hyphen between numbers");
         }
 
         [TestMethod]
         public void DoesInputHaveDuplicates()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("6-4-6-1");
+            var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6-4-6-1");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input has a duplicate");
         }
 
         [TestMethod]
         public void IsInputOnlyDuplicates()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("7-7-7-7");
+            var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("7-7-7-7");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input is all the same number");
         }
 
         [TestMethod]
         public void DoesInputHaveMultipleDuplicates()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("6-7-6-7-6-7");
+            var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6-7-6-7-6-7");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input is alternating duplicate numbers");
         }
 
         [TestMethod]
         public void DoesInputHaveNoDuplicates()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("1-24-6-48");
+            var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("1-24-6-48");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input has no duplicates");
         }
     }
 
@@ -138,7 +128,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime(null);
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input is null");
         }
 
         [TestMethod]
@@ -146,7 +136,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("1200");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input time does not have a colon");
         }
 
         [TestMethod]
@@ -154,7 +144,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("12 13");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "input time is separated by a space instead of a colon");
         }
 
         [TestMethod]
@@ -162,7 +152,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("13:45");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input is in the correct time format");
         }
 
         [TestMethod]
@@ -170,7 +160,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("00:00");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input time matches the start of new day");
         }
 
         [TestMethod]
@@ -178,7 +168,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("23:59");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "input time matches the end of the day");
         }
 
         [TestMethod]
@@ -186,23 +176,39 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("12:63");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "the minutes time is above 60 minutes");
         }
 
         [TestMethod]
         public void AreHoursBelow24()
         {
-            var actual = WorkingWithText.WorkingWithText.IsValidTime("24:05");
+            var actual = WorkingWithText.WorkingWithText.IsValidTime("25:05");
 
-            Assert.IsFalse(actual);
+            actual.Should().BeFalse(because: "the hours time is above 24 hours");
         }
 
         [TestMethod]
         public void DoesTimeHaveLeading0()
         {
-            var actual = WorkingWithText.WorkingWithText.IsValidTime("09:39");
+            var actual = WorkingWithText.WorkingWithText.IsValidTime("9:39");
 
-            Assert.IsTrue(actual);
+            actual.Should().BeFalse(because: "time input should lead with 0 if hour is singular");
+        }
+
+        [TestMethod]
+        public void NoMultipleColons()
+        {
+            var actual = WorkingWithText.WorkingWithText.IsValidTime("09:39:0");
+
+            actual.Should().BeFalse(because: "input has multiple semicolons");
+        }
+
+        [TestMethod]
+        public void DontAcceptLetters()
+        {
+            var actual = WorkingWithText.WorkingWithText.IsValidTime("AB:CD");
+
+            actual.Should().BeFalse(because: "input has invalid letters");
         }
     }
 
@@ -216,10 +222,10 @@ namespace WorkingWithTextTest
     {
         [TestMethod]
         public void CorrectlyProcessesEmptyString()
-        {           
+        {
             var actual = WorkingWithText.WorkingWithText.PascalConverter(null);
 
-            Assert.IsTrue(string.IsNullOrEmpty(actual));
+            actual.Should().BeNullOrEmpty(because: "input is either null or empty");
         }
 
         [TestMethod]
@@ -229,7 +235,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("House For Dogs");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "the input is converted to one word");
         }
 
         [TestMethod]
@@ -239,7 +245,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("does it rain");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "input is changed to one word with every starting letter capitalized");
         }
 
         [TestMethod]
@@ -249,7 +255,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("FUN FOR ALL");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "input is changed from all caps to correct Pascal case");
         }
 
         [TestMethod]
@@ -259,7 +265,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("WHAT Is my NaMe JiMmY bOi");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "input is changed from varied capitalization to correct Pascal Case");
         }
 
         [TestMethod]
@@ -269,7 +275,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("FunForAll");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "input is changed from singular word to correct Pascal Case");
         }
 
         [TestMethod]
@@ -279,7 +285,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("w h y");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "input is changed from separate letters into one capitalized word");
         }
 
         [TestMethod]
@@ -289,7 +295,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.PascalConverter("yeet ");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "input has unnecessary spaces trimmed off");
         }
     }
 
@@ -307,7 +313,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be 0 if input is empty");
         }
 
         [TestMethod]
@@ -317,7 +323,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("why");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be 0 if input has no vowels");
         }
 
         [TestMethod]
@@ -327,7 +333,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("Euouae");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be the length of the input if the input is all vowels");
         }
 
         [TestMethod]
@@ -337,7 +343,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("Pentagon");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be the number of vowels in the input");
         }
 
         [TestMethod]
@@ -347,7 +353,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("AeIoU");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be the amount of vowels in the input regardless of capitalization");
         }
 
         [TestMethod]
@@ -357,7 +363,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("the dog ate my homework");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should count the vowels even if input contains spaces");
         }
 
         [TestMethod]
@@ -367,7 +373,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("B");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be 0 if the input is not a vowel regardless of capitalization");
         }
 
         [TestMethod]
@@ -377,9 +383,7 @@ namespace WorkingWithTextTest
 
             var actual = WorkingWithText.WorkingWithText.VowelCounter("e");
 
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "vowel count should be 1 if the input is just one vowel");
         }
-
     }
-
 }
