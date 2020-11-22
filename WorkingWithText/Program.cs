@@ -13,79 +13,14 @@ namespace WorkingWithText
         // return bool False.
         public static bool IsConsecutive(string hyphenNum)
         {
-            var splitInput = hyphenNum.Split("-");
-
-            var parsedInput = new List<int>();
-
-            foreach (var item in splitInput)
-            {
-                if (int.TryParse(item, out var parsedItem))
-                {
-                    parsedInput.Add(parsedItem);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            // check for ascending
-            var isAscending  = true;
-            var isDescending = true;
-
-            for (var i = 0; i < parsedInput.Count - 1; i++)
-            {
-                if (isAscending && parsedInput[i] + 1 != parsedInput[i + 1])
-                {
-                    isAscending = false;
-                }
-
-                if (isDescending && parsedInput[i] - 1 != parsedInput[i + 1])
-                {
-                    isDescending = false;
-                }
-
-                if (!(isAscending || isDescending))
-                {
-                    break;
-                }
-            }
-
-            return isAscending || isDescending;
+            return default;
         }
 
         // 2- Write a method that accepts a few numbers separated by a hyphen. Check
         // to see if there are duplicates. If so, return bool True; otherwise, return bool False.
         public static bool AreThereDuplicates(string hyphenNum)
         {
-            var splitInput = hyphenNum.Split("-");
-
-            var parsedInput = new List<int>();
-
-            var hasDuplicates = false;
-
-            foreach (var item in splitInput)
-            {
-                if (int.TryParse(item, out var parsedItem))
-                {
-                    parsedInput.Add(parsedItem);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            parsedInput.Sort();
-            for (var j = 0; j < parsedInput.Count - 1; j++)
-            {
-                if (parsedInput[j] == parsedInput[j + 1])
-                {
-                    hasDuplicates = true;
-                }
-            }
-
-            return hasDuplicates;
+            return default;
         }
 
         // 3- Write a method that accepts a string of a time 24-hour time format
@@ -94,28 +29,7 @@ namespace WorkingWithText
         // consider it as False. Make sure that its returns false if any letters are passed.
         public static bool IsValidTime(string hyphenNum)
         {
-            if (hyphenNum is null || hyphenNum.Length == 4 || hyphenNum.Any(char.IsLetter))
-            {
-                return false;
-            }
-
-            var splitInput = hyphenNum.Split(":");
-
-            if (splitInput.Length != 2)
-            {
-                return false;
-            }
-
-            if (Convert.ToInt32(splitInput[0]) < 0 || Convert.ToInt32(splitInput[0]) > 23)
-            {
-                return false;
-            }
-            if (Convert.ToInt32(splitInput[1]) < 0 || Convert.ToInt32(splitInput[1]) > 60)
-            {
-                return false;
-            }
-
-            return true;
+ 			return default;
         }
 
         // 4- Write a method that accepts a string of a few words separated by a space. Use the
@@ -125,22 +39,7 @@ namespace WorkingWithText
         // Trim off unneeded spaces.
         public static string PascalConverter(string aFewWords)
         {
-            if (aFewWords is null)
-            {
-                return null;
-            }
-
-            string ModifiedInput = aFewWords.ToLower().Trim(); 
-            var splitInput = ModifiedInput.Split(" ");
-
-            string Output = null;
-            foreach (var word in splitInput)
-            {
-                var final = char.ToUpper(word[0]);
-                Output += final + word[1..];
-            }
-
-            return Output;
+        	return default;
         }
 
         // 5- Write a method that accepts an English word. Count the number of vowels
@@ -148,25 +47,7 @@ namespace WorkingWithText
         // return 6.
         public static int VowelCounter(string aWord)
         {
-            int vowelCount = 0;
-            if (string.IsNullOrEmpty(aWord))
-            {
-                vowelCount = 0;
-            }
-            else
-            {
-                aWord = aWord.ToLower();
-                for (int i = 0; i < aWord.Length; i++)
-                {
-                    if (aWord[i] == 'a' || aWord[i] == 'e' || aWord[i] == 'i' || aWord[i] == 'o' || aWord[i] == 'u')
-                    {
-                        vowelCount++;  
-                    }
-                }
-            }
-
-
-            return vowelCount;
+            return default;
         }
     }
 
