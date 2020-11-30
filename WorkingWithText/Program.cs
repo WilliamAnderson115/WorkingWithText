@@ -11,6 +11,7 @@ namespace WorkingWithText
         // is NOT in the correct format OR is NOT consecutive then return bool False. If the format 
         // is correct AND the numbers are consecutive, return bool True. For
         // example, if the input is "5-6-7-8-9" or "20-19-18-17-16", return bool True.
+        // Do not use .Sort, it will cause the test to pass when it actually does not.
         public static bool IsConsecutive(string hyphenNum)
         {
             return default;
