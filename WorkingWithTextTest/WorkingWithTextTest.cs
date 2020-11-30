@@ -7,6 +7,7 @@ namespace WorkingWithTextTest
     // Work out if the numbers are consecutive. For example, if the input is "5-6-7-8-9" or
     // "20-19-18-17-16", return bool True; otherwise, return bool False. If the string
     // is badly formatted, also return false.
+    // Do not use .Sort, it will cause the test to pass when it actually does not.
     [TestClass]
     public class IsConsecutiveTest
     {
@@ -57,7 +58,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("14-15-16-7-18-19-20");
 
-            actual.Should().BeFalse(because: "input is incrementally consecutive");
+            actual.Should().BeFalse(because: "input is NOT incrementally consecutive");
         }
     }
 
