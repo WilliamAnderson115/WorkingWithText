@@ -57,7 +57,15 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("14-15-16-7-18-19-20");
 
-            actual.Should().BeFalse(because: "input is incrementally consecutive");
+            actual.Should().BeFalse(because: "input is NOT incrementally consecutive");
+        }
+
+        [TestMethod]
+        public void NotConsecutive()
+        {
+            var result = WorkingWithText.WorkingWithText.IsConsecutive("1-2-4-3");
+
+            result.Should().BeFalse(because: "the input (1-2-4-3) is not consecutive");
         }
     }
 
