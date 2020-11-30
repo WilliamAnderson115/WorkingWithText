@@ -8,8 +8,8 @@ namespace WorkingWithText
     public static class WorkingWithText
     {
         // 1- Write a method that accepts a string of numbers separated by a hyphen. If the input 
-        // is not in the correct format OR is NOT consecutive then return bool False. If the format 
-        // is correct AND the numbers are consecutive, return bool True, return false. For
+        // is NOT in the correct format OR is NOT consecutive then return bool False. If the format 
+        // is correct AND the numbers are consecutive, return bool True. For
         // example, if the input is "5-6-7-8-9" or "20-19-18-17-16", return bool True.
         public static bool IsConsecutive(string hyphenNum)
         {
