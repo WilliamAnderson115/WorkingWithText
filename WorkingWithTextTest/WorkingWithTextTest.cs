@@ -16,7 +16,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("6-4 2,9");
 
-            actual.Should().BeFalse(because: "input is not hyphenated");
+            actual.Should().BeFalse(because: "the input (6-4 2,9) is not hyphenated");
         }
 
         [TestMethod]
@@ -24,15 +24,15 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("6--4-2---9");
 
-            actual.Should().BeFalse(because: "input has more than one hyphen between numbers");
+            actual.Should().BeFalse(because: "the input (6--4-2---9) has more than one hyphen between numbers");
         }
 
         [TestMethod]
         public void IsInputConsecutiveAscending()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("0-1-2-3-4");
+            var actual = WorkingWithText.WorkingWithText.IsConsecutive("1-2-3-4");
 
-            actual.Should().BeTrue(because: "input is in consecutive ascending order");
+            actual.Should().BeTrue(because: "the input (1-2-3-4) is in consecutive ascending order");
         }
 
         [TestMethod]
@@ -40,9 +40,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("9-8-7-6");
 
-            actual.Should().BeTrue(because: "input is in consecutive descending order");
-
-            Assert.IsTrue(actual);
+            actual.Should().BeTrue(because: "the input (9-8-7-6) is in consecutive descending order");
         }
 
         [TestMethod]
@@ -50,15 +48,15 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsConsecutive("2-2-2-2");
 
-            actual.Should().BeFalse(because: "Input is not consecutive");
+            actual.Should().BeFalse(because: "the input is not consecutive");
         }
 
         [TestMethod]
         public void IsEveryOtherInputNotConsecutive()
         {
-            var actual = WorkingWithText.WorkingWithText.IsConsecutive("14-15-16-7-18-19-20");
+            var actual = WorkingWithText.WorkingWithText.IsConsecutive("15-16-7-18-19");
 
-            actual.Should().BeFalse(because: "input is NOT incrementally consecutive");
+            actual.Should().BeFalse(because: "the input (15-16-7-18-19) is NOT incrementally consecutive");
         }
 
         [TestMethod]
@@ -81,7 +79,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6-4 2,9");
 
-            actual.Should().BeFalse(because: "input is not separated properly by hyphens");
+            actual.Should().BeFalse(because: "the input (6-4 2,9) is not separated properly by hyphens");
         }
 
         [TestMethod]
@@ -89,7 +87,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6--4-2---9");
 
-            actual.Should().BeFalse(because: "input has more than one hyphen between numbers");
+            actual.Should().BeFalse(because: "the input (6--4-2---9) has more than one hyphen between numbers");
         }
 
         [TestMethod]
@@ -97,7 +95,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6-4-6-1");
 
-            actual.Should().BeTrue(because: "input has a duplicate");
+            actual.Should().BeTrue(because: "the input (6-4-6-1) has a duplicate");
         }
 
         [TestMethod]
@@ -105,7 +103,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("7-7-7-7");
 
-            actual.Should().BeTrue(because: "input is all the same number");
+            actual.Should().BeTrue(because: "the input (7-7-7-7) is all the same number");
         }
 
         [TestMethod]
@@ -113,7 +111,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("6-7-6-7-6-7");
 
-            actual.Should().BeTrue(because: "input is alternating duplicate numbers");
+            actual.Should().BeTrue(because: "the input (6-7-6-7-6-7) is alternating duplicate numbers");
         }
 
         [TestMethod]
@@ -121,7 +119,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.AreThereDuplicates("1-24-6-48");
 
-            actual.Should().BeFalse(because: "input has no duplicates");
+            actual.Should().BeFalse(because: "the input (1-24-6-48) has no duplicates");
         }
     }
 
@@ -145,7 +143,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("1200");
 
-            actual.Should().BeFalse(because: "input time does not have a colon");
+            actual.Should().BeFalse(because: "the input time (1200) does not have a colon");
         }
 
         [TestMethod]
@@ -153,7 +151,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("12 13");
 
-            actual.Should().BeFalse(because: "input time is separated by a space instead of a colon");
+            actual.Should().BeFalse(because: "the input time (12 13) is separated by a space instead of a colon");
         }
 
         [TestMethod]
@@ -161,7 +159,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("13:45");
 
-            actual.Should().BeTrue(because: "input is in the correct time format");
+            actual.Should().BeTrue(because: "the input (13:45) is in the correct time format");
         }
 
         [TestMethod]
@@ -169,7 +167,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("00:00");
 
-            actual.Should().BeTrue(because: "input time matches the start of new day");
+            actual.Should().BeTrue(because: "the input time matches the start of new day");
         }
 
         [TestMethod]
@@ -177,7 +175,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("23:59");
 
-            actual.Should().BeTrue(because: "input time matches the end of the day");
+            actual.Should().BeTrue(because: "the input time (23:59) matches the end of the day");
         }
 
         [TestMethod]
@@ -185,7 +183,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("12:63");
 
-            actual.Should().BeFalse(because: "the minutes time is above 60 minutes");
+            actual.Should().BeFalse(because: "the input (12:63) minutes time is above 60 minutes");
         }
 
         [TestMethod]
@@ -193,7 +191,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("25:05");
 
-            actual.Should().BeFalse(because: "the hours time is above 24 hours");
+            actual.Should().BeFalse(because: "the input (25:05) hours time is above 24 hours");
         }
 
         [TestMethod]
@@ -201,7 +199,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("9:39");
 
-            actual.Should().BeFalse(because: "time input should lead with 0 if hour is singular");
+            actual.Should().BeFalse(because: "the input (9:39) needs to lead with 0 if hour is singular");
         }
 
         [TestMethod]
@@ -209,7 +207,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("09:39:0");
 
-            actual.Should().BeFalse(because: "input has multiple semicolons");
+            actual.Should().BeFalse(because: "the input (09:39:0) has multiple semicolons");
         }
 
         [TestMethod]
@@ -217,7 +215,7 @@ namespace WorkingWithTextTest
         {
             var actual = WorkingWithText.WorkingWithText.IsValidTime("AB:CD");
 
-            actual.Should().BeFalse(because: "input has invalid letters");
+            actual.Should().BeFalse(because: "the input (AB:CD) has invalid characters");
         }
     }
 
