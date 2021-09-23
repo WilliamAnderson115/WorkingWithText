@@ -7,19 +7,19 @@ namespace WorkingWithText
 {
     public static class WorkingWithText
     {
-        // 1- Write a method that accepts a string of numbers separated by a hyphen. If the input 
+        // 1- Write a method that accepts a few numbers separated by a hyphen. Check
+        // to see if there are duplicates. If so, return bool True; otherwise, return bool False.
+        public static bool AreThereDuplicates(string hyphenNum)
+        {
+            return default;
+        }
+        
+        // 2- Write a method that accepts a string of numbers separated by a hyphen. If the input 
         // is NOT in the correct format OR is NOT consecutive then return bool False. If the format 
         // is correct AND the numbers are consecutive, return bool True. For
         // example, if the input is "5-6-7-8-9" or "20-19-18-17-16", return bool True.
         // Do not use .Sort, it will cause the test to pass when it actually does not.
         public static bool IsConsecutive(string hyphenNum)
-        {
-            return default;
-        }
-
-        // 2- Write a method that accepts a few numbers separated by a hyphen. Check
-        // to see if there are duplicates. If so, return bool True; otherwise, return bool False.
-        public static bool AreThereDuplicates(string hyphenNum)
         {
             return default;
         }
