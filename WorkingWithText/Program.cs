@@ -11,7 +11,12 @@ namespace WorkingWithText
         // to see if there are duplicates. If so, return bool True; otherwise, return bool False.
         public static bool AreThereDuplicates(string hyphenNum)
         {
-            return default;
+            bool Duplicates = false;
+
+            if(hyphenNum.Split("-").Count() != hyphenNum.Split("-").Distinct().Count())
+                Duplicates = true;
+
+            return Duplicates;
         }
         
         // 2- Write a method that accepts a string of numbers separated by a hyphen. If the input 
@@ -21,7 +26,43 @@ namespace WorkingWithText
         // Do not use .Sort, it will cause the test to pass when it actually does not.
         public static bool IsConsecutive(string hyphenNum)
         {
-            return default;
+            //Found new test, (15-16-15-16-16)
+            bool Consecutive = false;
+            try
+            {
+                int[] ConsecutiveNumbers = Array.ConvertAll(hyphenNum.Split("-"), int.Parse);
+                for (int i = 0; i < ConsecutiveNumbers.Length - 1; i++)
+                {
+                    if (ConsecutiveNumbers[i] == ConsecutiveNumbers[i + 1] - 1)
+                    {
+                        Consecutive = true;
+                    }
+                    else
+                    {
+                        Consecutive = false;
+                        break;
+                    }
+                }
+                if (!Consecutive)
+                {
+                    for (int i = 0; i < ConsecutiveNumbers.Length - 1; i++)
+                    {
+                        if (ConsecutiveNumbers[i] == ConsecutiveNumbers[i + 1] + 1)
+                            Consecutive = true;
+                        else
+                        {
+                            Consecutive = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                string ErrorMessage = "String Improperly formated";
+            }
+
+            return Consecutive;
         }
 
         // 3- Write a method that accepts a string of a time 24-hour time format
@@ -57,7 +98,28 @@ namespace WorkingWithText
     {
         private static void Main()
         {
-            // Method intentionally left empty.
+            string hyphenNum = "15-16-15-16-15-16";
+            bool Consecutive = false;
+            try
+            {
+                int[] ConsecutiveNumbers = Array.ConvertAll(hyphenNum.Split("-"), int.Parse);
+                for (int i = 0; i < ConsecutiveNumbers.Length - 1; i++)
+                {
+                    if (ConsecutiveNumbers[i] == ConsecutiveNumbers[i + 1] - 1 || ConsecutiveNumbers[i] == ConsecutiveNumbers[i + 1] + 1)
+                    {
+                        Consecutive = true;
+                    }
+                    else
+                    {
+                        Consecutive = false;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                string ErrorMessage = "String Improperly formated";
+            }
         }
     }
 }
