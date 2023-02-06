@@ -12,9 +12,15 @@ namespace WorkingWithText
         public static bool AreThereDuplicates(string hyphenNum)
         {
             bool Duplicates = false;
+<<<<<<< HEAD
             List<string> numbers = hyphenNum.Split("-").ToList();
             numbers.RemoveAll(str => string.IsNullOrEmpty(str));
             if (numbers.Distinct().Count() != numbers.Count())
+=======
+            string[] words = hyphenNum.Split("-");
+            words = words.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            if (words.Count() != words.Distinct().Count())
+>>>>>>> 1a84a03f938c250d19677b5008551e00f923df49
                 Duplicates = true;
 
             return Duplicates;
@@ -27,7 +33,42 @@ namespace WorkingWithText
         // Do not use .Sort, it will cause the test to pass when it actually does not.
         public static bool IsConsecutive(string hyphenNum)
         {
-            return default;
+            bool Consecutive = false;
+            try
+            {
+                int[] ConsecutiveNumbers = Array.ConvertAll(hyphenNum.Split("-"), int.Parse);
+                for (int i = 0; i < ConsecutiveNumbers.Length - 1; i++)
+                {
+                    if (ConsecutiveNumbers[i] == ConsecutiveNumbers[i + 1] - 1)
+                    {
+                        Consecutive = true;
+                    }
+                    else
+                    {
+                        Consecutive = false;
+                        break;
+                    }
+                }
+                if (!Consecutive)
+                {
+                    for (int i = 0; i < ConsecutiveNumbers.Length - 1; i++)
+                    {
+                        if (ConsecutiveNumbers[i] == ConsecutiveNumbers[i + 1] + 1)
+                            Consecutive = true;
+                        else
+                        {
+                            Consecutive = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                string ErrorMessage = "String Improperly formated";
+            }
+
+            return Consecutive;
         }
 
         // 3- Write a method that accepts a string of a time 24-hour time format
@@ -36,7 +77,17 @@ namespace WorkingWithText
         // consider it as False. Make sure that its returns false if any letters are passed.
         public static bool IsValidTime(string hyphenNum)
         {
- 			return default;
+            bool IsValidTime = false;
+            try
+            {
+                DateTime.ParseExact(hyphenNum, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                IsValidTime = true;
+            }
+            catch
+            {
+                string Invalid = "Invalid Time";
+            }
+ 			return IsValidTime;
         }
 
         // 4- Write a method that accepts a string of a few words separated by a space. Use the
@@ -46,7 +97,19 @@ namespace WorkingWithText
         // Trim off unneeded spaces.
         public static string PascalConverter(string aFewWords)
         {
-        	return default;
+            string PascalWords = "";
+            string WordHolder = "";
+
+            if (!string.IsNullOrEmpty(aFewWords))
+            {
+                foreach (string word in aFewWords.Trim().Split(" "))
+                {
+                    WordHolder = word.Substring(0, 1).ToUpper() + word.Substring(1).ToLower();
+                    PascalWords += WordHolder;
+                }
+            }
+
+        	return PascalWords;
         }
 
         // 5- Write a method that accepts an English word. Count the number of vowels
@@ -54,7 +117,16 @@ namespace WorkingWithText
         // return 6.
         public static int VowelCounter(string aWord)
         {
-            return default;
+            int Vowels = 0;
+
+            char[] chars = aWord.ToLower().ToCharArray();
+            foreach (char v in chars)
+            {
+                if (v is 'a' or 'e' or 'i' or 'o' or 'u')
+                    Vowels++;
+            }
+
+            return Vowels;
         }
     }
 
@@ -63,7 +135,7 @@ namespace WorkingWithText
     {
         private static void Main()
         {
-            // Method intentionally left empty.
+
         }
     }
 }
