@@ -11,7 +11,13 @@ namespace WorkingWithText
         // to see if there are duplicates. If so, return bool True; otherwise, return bool False.
         public static bool AreThereDuplicates(string hyphenNum)
         {
-            return default;
+            bool Duplicates = false;
+            List<string> numbers = hyphenNum.Split("-").ToList();
+            numbers.RemoveAll(str => string.IsNullOrEmpty(str));
+            if (numbers.Distinct().Count() != numbers.Count())
+                Duplicates = true;
+
+            return Duplicates;
         }
         
         // 2- Write a method that accepts a string of numbers separated by a hyphen. If the input 
